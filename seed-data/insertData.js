@@ -9,14 +9,14 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 
 //import the listings json
 const listings = require("./listings.json")
-console.log("Listings.Init", listings)
+// console.log("Listings.Init", listings)
 
 //lets insert them into the table
 //loop over the listings
 listings.map(l => {
   //create params object
   listingParams = {
-    TableName: "dev-lunar-listings",
+    TableName: "dev-listings",
     Item: {
       coverPhoto: l.coverPhoto,
       guide: {
@@ -44,8 +44,7 @@ listings.map(l => {
     if (err) {
       console.error(
         "Unable to add listing",
-        user.name,
-        ". Error JSON:",
+        "Error JSON:",
         JSON.stringify(err, null, 2)
       )
     } else {

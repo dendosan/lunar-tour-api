@@ -1,11 +1,4 @@
 const schema = `
-"""
-A hello world Query
-"""
-type Query {
-   hello: String!
-}
-
 type ListingType {
    name: String
 }
@@ -15,11 +8,11 @@ type ListingActivities {
 }
    
 type Guide {
-   Name: String
-   Bio: String
-   Avatar: String
+  Name: String
+  Bio: String
+  Avatar: String
 }
-   
+
 type Listing {
    listingId: String
    coverPhoto: String
@@ -36,8 +29,50 @@ type Listing {
    numberOfDays: Int
 }
 
-type Query {
-   getAllListings: [Listing]
+type Booking {
+   bookingId: String
+   listingId: String
+   bookingDate: String
+   size: Int
+   bookingTotal: String
+   customerEmail: String
+   customers: [Customer]
+   chargeReciept: String
 }
-`
-export { schema }
+type Customer {
+  name: String
+  surname: String
+  country: String
+  passportNumber: String
+  physioScore: String
+}
+
+input CustomerInput {
+  name: String
+  surname: String
+  country: String
+  passportNumber: String
+  physioScore: String
+}
+    
+"""
+A hello world Query
+"""
+type Query {
+     hello: String!
+     getAllListings: [Listing]
+     getAListing(listingId: String!): Listing!
+}
+type Mutation {
+     makeABooking(
+       listingId: String
+       bookingDate: String,
+       customerEmail: String,
+       customers: [CustomerInput]
+     ): Booking
+   
+   }
+   
+`;
+
+export { schema };
